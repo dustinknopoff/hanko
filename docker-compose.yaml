@@ -1,6 +1,10 @@
 services:
   hanko-migrate:
     build: ./backend
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /etc/config/config.yaml
     command: --config /etc/config/config.yaml migrate up
     restart: on-failure
     depends_on:
@@ -18,6 +22,10 @@ services:
       - '8001:8001' # admin
     restart: unless-stopped
     command: serve --config /etc/config/config.yaml all
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /etc/config/config.yaml
     networks:
       - intranet
     environment:
