@@ -6,7 +6,7 @@ database:
   dialect: postgres
 passcode:
   email:
-    from_address: no-reply@hanko.io
+    from_address: auth@knopoff.dev
   smtp:
     host: "mailslurper"
     port: "2500"
@@ -14,14 +14,15 @@ secrets:
   keys:
     - abcedfghijklmnopqrstuvwxyz
 service:
-  name: Hanko Authentication Service
+  name: Knopoff Authentication
 webauthn:
   relying_party:
     origins:
-    - "http://localhost:8888"
+    - "https://auth.knopoff.dev"
+    - "https://recipes.knopoff.dev"
 session:
   cookie:
-    secure: false # is needed for safari, because safari does not store secure cookies on localhost
+    secure: true # is needed for safari, because safari does not store secure cookies on localhost
 rate_limiter:
   enabled: true
   store: "redis"
@@ -32,4 +33,5 @@ password:
 server:
   cors:
     allow_origins:
-      - "http://localhost:8888"
+      - "https://auth.knopoff.dev"
+      - "https://recipes.knopoff.dev"
