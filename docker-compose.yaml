@@ -1,7 +1,7 @@
 services:
   hanko-migrate:
     build: ./backend
-    command: --config /etc/config/config.yaml migrate up
+    command: --config ./config.yaml migrate up
     restart: on-failure
     depends_on:
       postgresd:
@@ -17,7 +17,7 @@ services:
       - '8000:8000' # public
       - '8001:8001' # admin
     restart: unless-stopped
-    command: serve --config /etc/config/config.yaml all
+    command: serve --config ./config.yaml all
     networks:
       - intranet
     environment:
