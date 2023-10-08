@@ -5,8 +5,8 @@ services:
     volumes:
       - type: bind
         source: ./config.yaml
-        target: /etc/config/config.yaml
-    command: --config /etc/config/config.yaml migrate up
+        target: /etc/hanko-config.yaml
+    command: --config /etc/hanko-config.yaml migrate up
     restart: on-failure
     depends_on:
       postgresd:
@@ -22,11 +22,11 @@ services:
       - '8000:8000' # public
       - '8001:8001' # admin
     restart: unless-stopped
-    command: serve --config /etc/config/config.yaml all
+    command: serve --config /etc/hanko-config.yaml all
     volumes:
       - type: bind
         source: ./config.yaml
-        target: /etc/config/config.yaml
+        target: /etc/hanko-config.yaml
     networks:
       - intranet
     environment:
